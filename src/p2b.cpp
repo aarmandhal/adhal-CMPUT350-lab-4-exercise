@@ -122,20 +122,23 @@ int main() {
     }
     uint64_t timeMorton = timer.click<Timer::Micros>();
 
-    // Phase 6: Verify results (runs in every build, not just debug, which also
-    // forces the compiler to keep the convolution loops above from being
-    // optimized away as dead code, since their outputs are genuinely read here)
+    // Phase 6: Verify results
     size_t mismatches = 0;
+    // Loop through each element in the output array and check for mismatches
     for (size_t x = 0; x < OUT_DIM; ++x) {
         for (size_t y = 0; y < OUT_DIM; ++y) {
             for (size_t z = 0; z < OUT_DIM; ++z) {
+                // Compare the convolution results for each element
                 if (convA[rowMajorIndexConv(x, y, z)] != convB[morton3d(x, y, z)]) {
+                    // Increment the number of mismatches
                     ++mismatches;
                 }
             }
         }
     }
+    // Assert that there are no mismatches
     assert(mismatches == 0);
+    // If there are mismatches, print an error message and abort
     if (mismatches != 0) {
         std::cerr << "Verification failed: " << mismatches << " mismatches\n";
         std::abort();
