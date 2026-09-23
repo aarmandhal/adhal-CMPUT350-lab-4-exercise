@@ -1,0 +1,9 @@
+Output:
+8610
+101388
+
+Justification:
+Row major convolution was a lot faster than morton order convolution.  This is caused by each Morton index having to call morton3d which runs
+the bit manipulation loop 3 times (once per x, y, z coordinate).  This adds considerable overhead to the morton order convolution. Even though a 4x4x4
+block is contiguous in memory under Morton order (unlike row-major, where the same block is scattered across memory), the cost of repeatedly computing
+Morton indices outweighs that cache-locality advantage at this block size.

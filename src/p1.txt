@@ -1,0 +1,8 @@
+Output:
+2371 347898375840389362
+33214 347898375840389362
+
+Justification: 
+Row major traversal sums the array in the order it is in memory which is cache friendly. Column major traversal jumps around in memory which is not cache friendly.
+The exact jump is 4000 elements which is the size of a row. This is due to the fact that the array is stored in row major order, causing for more cache misses.  So despite the 
+summing of identical data in teh same number of operations column major traversal is about 14 times slower than row major traversal.  
