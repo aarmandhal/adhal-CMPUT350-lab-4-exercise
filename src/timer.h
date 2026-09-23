@@ -37,7 +37,7 @@ public:
         auto temp = std::chrono::steady_clock::now();
         T elapsed = std::chrono::duration_cast<T>(temp - mark_);
         return elapsed.count();
-    };
+    }
 
 private:
     // The time point used as a reference for measuring elapsed time
