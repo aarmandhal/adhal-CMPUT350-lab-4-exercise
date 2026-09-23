@@ -5,6 +5,7 @@
 #include <cstddef>  // size_t
 #include <cstdint>  // uint64_t, uint32_t
 
+// Expand function from prelab
 inline uint64_t expand(uint64_t input, uint32_t scale) {
     assert(scale >= 1);
 
